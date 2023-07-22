@@ -3,6 +3,7 @@ from time import time as timer
 mixer.init()
 font.init()
 back = (100,100,255)
+font2 = font.Font(None,30)
 win_width = 600
 win_height = 500
 window = display.set_mode((win_width,win_height))
@@ -38,6 +39,8 @@ ball = GameSprite("tennis.png",200,200,30,50,0)
 speed_x = 3
 speed_y = 3
 finish =False
+text_win1 = font2.render("Первый игрок побеждает!",1,(255,1,1))
+text_win2 = font2.render("Второй игрок побеждает!",1,(1,255,1))
 while game:
     for e in event.get():
         if e.type == QUIT:
@@ -58,10 +61,10 @@ while game:
                 speed_y *= -1
         if ball.rect.x < 0 :
             finish = True
-            
+            window.blit(text_win2,(180,250))
         if ball.rect.x > win_width:
             finish = True
-            
+            window.blit(text_win1,(180,250))
         rack1.reset()
         rack2.reset()
         ball.reset()
